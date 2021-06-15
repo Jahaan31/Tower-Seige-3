@@ -10,6 +10,8 @@ const World = Matter.World
 const Engine = Matter.Engine
 const Bodies = Matter.Bodies 
 
+var hour1
+
 function preload(){
     bgday = loadImage("download.jpg")
     bgnight = loadImage("night.jpg")
@@ -83,13 +85,18 @@ function draw(){
 background("white");
 Engine.update(myengine);
 
-if(hour>=6 && hour<=18){
-    background(bgday)
-}
+if(hour1){
+    console.log("hour:" +hour1) 
+        if(hour1>=06 && hour1<=18){
+    console.log("day" ) 
+            background(bgday)
+        }
+        else{
+    console.log("night" ) 
+            background(bgnight)  
+        } 
+    }
 
-if(hour<=18 && hour>=6){
-    background(bgnight)
-}
 
 textSize(30)
 text("Score:"+score, 50, 50)
@@ -209,6 +216,6 @@ async function API(){
     var APIFetch = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata")
     var json = await APIFetch.json();
     var dateTime = json.datetime
-    var hour = dateTime.slice(11,13);
-    console.log(hour)
+     hour1 = dateTime.slice(11,13);
+    //console.log(hour)
 }
